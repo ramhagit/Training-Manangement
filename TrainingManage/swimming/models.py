@@ -11,8 +11,22 @@ class Coach(models.Model):
 
 
 class Group(models.Model):
+    class Level(models.IntegerChoices):
+        Pre_swim = 1
+        begginers = 2
+        advanced = 3
+        competative = 4
+
+    class AgeGroup(models.IntegerChoices):
+        five_to_seven = 1
+        eight_to_twelve = 2
+        thirteen_to_eighteen = 3
+        above_eighteen = 4
+
     name = models.CharField(max_length=200)
     capacity = models.IntegerField(null = True)
+    level = models.IntegerField(choices=Level.choices)
+    age_group = models.IntegerField(choices=AgeGroup.choices)
     coach = models.ForeignKey(Coach, on_delete = models.PROTECT, related_name = "groups")
 
     def __str__(self):

@@ -10,6 +10,7 @@ django = "*"
 ipython = "*"
 django-extensions = "*"
 silly = "*"
+inflect = "*"
 
 [requires]
 python_version = "3.7"

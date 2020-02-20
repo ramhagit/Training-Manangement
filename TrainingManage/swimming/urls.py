@@ -6,6 +6,6 @@ app_name = "swimming"
 
 urlpatterns = [
 
-    path('groups/', views.show_groups, name = "show_groups"),
+    path('groups/<int:coach_id>/', views.show_groups, name = "show_groups"),
     path('group/<int:group_id>/', views.group_detail, name = 'group_detail'),
 ]
