@@ -18,10 +18,11 @@ class Group(models.Model):
         competative = 4
 
     class AgeGroup(models.IntegerChoices):
-        five_to_seven = 1
-        eight_to_twelve = 2
-        thirteen_to_eighteen = 3
-        above_eighteen = 4
+        five_to_seven = 1, '5-7'
+        eight_to_twelve = 2, '8-12'
+        thirteen_to_eighteen = 3, '13-18'
+        above_eighteen = 4, '18+'
+        __empty__ = '(Unknown)'
 
     name = models.CharField(max_length=200)
     capacity = models.IntegerField(null = True)
@@ -30,7 +31,7 @@ class Group(models.Model):
     coach = models.ForeignKey(Coach, on_delete = models.PROTECT, related_name = "groups")
 
     def __str__(self):
-        return self.name
+        return self.name.title()
 
 
 class Trainee(models.Model):
@@ -38,7 +39,7 @@ class Trainee(models.Model):
     last_name = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
     birth_date = models.DateField(null = True)
-    group = models.ForeignKey(Group, on_delete=models.PROTECT, related_name="trainees")
+    group = models.ForeignKey(Group, on_delete=models.PROTECT, related_name = "trainees")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

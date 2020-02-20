@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet"
+          href="{% static "vendor/bootstrap/css/bootstrap.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    <title>{% block title %}PO TIDCHUF TITLE{% endblock %}</title>
+</head>
+<body>
+<div class="container-fluid">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="{% url "expenses:list" %}">ExMan2020</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                {% if user.is_authenticated %}
+                    <span class="navbar-text">
+                        USER: {{ user }} (#{{ user.id }})
+                </span>
+                    <a class="nav-link" href="{% url "logout" %}">
+                        Logout
+                    </a>
+                {% else %}
+                    <a class="nav-link" href="{% url "login" %}">
+                        Login
+                    </a>
+                {% endif %}
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url "expenses:create" %}">
+                    Create Expense
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url "feedback:contact" %}">Contact
+                    us</a>
+            </li>
+        </ul>
+    </nav>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %}
+                    class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% block content %}PO TIDCHUF CONTENT{% endblock %}
+
+    <footer>
+        Copyright 2020
+    </footer>
+
+    {% block scripts %}
+
+    {% endblock %}
+
+</div>
+
+</body>
+</html>
