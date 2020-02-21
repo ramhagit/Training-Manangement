@@ -1,33 +1,33 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Coach(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    gender = models.CharField(max_length=200)
+    first_name = models.CharField(max_length = 200)
+    last_name = models.CharField(max_length = 200)
+    gender = models.CharField(max_length = 200)
 
-    def __str__(self):
+    def __str__(self) :
         return f"{self.first_name} {self.last_name}"
 
 
 class Group(models.Model):
     class Level(models.IntegerChoices):
-        Pre_swim = 1
-        begginers = 2
-        advanced = 3
-        competative = 4
+        Pre_swim = 1, _('Pre_swim'),
+        begginers = 2, _('begginers'),
+        advanced = 3, _('advanced'),
+        competative = 4, _('competative')
 
     class AgeGroup(models.IntegerChoices):
-        five_to_seven = 1, '5-7'
-        eight_to_twelve = 2, '8-12'
-        thirteen_to_eighteen = 3, '13-18'
-        above_eighteen = 4, '18+'
-        __empty__ = '(Unknown)'
+        five_to_seven = 1, _('5-7')
+        eight_to_twelve = 2, _('8-12')
+        thirteen_to_eighteen = 3, _('13-18')
+        above_eighteen = 4, _('18+')
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length = 200)
     capacity = models.IntegerField(null = True)
-    level = models.IntegerField(choices=Level.choices)
-    age_group = models.IntegerField(choices=AgeGroup.choices)
+    level = models.IntegerField(choices = Level.choices)
+    age_group = models.IntegerField(choices = AgeGroup.choices)
     coach = models.ForeignKey(Coach, on_delete = models.PROTECT, related_name = "groups")
 
     def __str__(self):
@@ -35,11 +35,11 @@ class Group(models.Model):
 
 
 class Trainee(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    gender = models.CharField(max_length=200)
+    first_name = models.CharField(max_length = 200)
+    last_name = models.CharField(max_length = 200)
+    gender = models.CharField(max_length = 200)
     birth_date = models.DateField(null = True)
-    group = models.ForeignKey(Group, on_delete=models.PROTECT, related_name = "trainees")
+    group = models.ForeignKey(Group, on_delete = models.PROTECT, related_name = "trainees")
 
-    def __str__(self):
+    def __str__(self) :
         return f"{self.first_name} {self.last_name}"

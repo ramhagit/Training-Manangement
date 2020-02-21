@@ -32,9 +32,9 @@
                 <div class="card-body">
                     Max participants: {{ group.0.capacity }}
                     <br><br>
-                    Level: {{ group.0.level }}
+                    Level: {{ group.0.get_level_display }}
                     <br><br>
-                    Age group: {{ group.0.age_group }}
+                    Age group: {{ group.0.get_age_group_display }}
                     <br><br>
                     Members: <a href="{% url 'swimming:group_detail' group.0.id %}">{{ group.1 }}</a>
                 </div>

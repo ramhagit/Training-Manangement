@@ -23,8 +23,8 @@ class Command(BaseCommand):
             o = Group(
                 name = silly.name(),
                 capacity = random.uniform(8, 20),
-                level = random.uniform(1, 4),
-                age_group = random.uniform(1, 4),
+                level = random.choice(Group.Level.choices)[0],
+                age_group = random.choice(Group.AgeGroup.choices)[0],
                 coach = random.choice(coaches))
             o.save()
 
