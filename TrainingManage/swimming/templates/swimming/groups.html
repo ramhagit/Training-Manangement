@@ -30,13 +30,13 @@
             <div id="collapse{{ group.0.id }}" class="collapse" aria-labelledby="heading{{ group.0.id }}"
                  data-parent="#accordionExample">
                 <div class="card-body">
-                    Max participants: {{ group.0.capacity }}
+                    Max participants: &nbsp; <b>{{ group.0.capacity }}</b>
                     <br><br>
-                    Level: {{ group.0.get_level_display }}
+                    Level: &nbsp; <b>{{ group.0.get_level_display }}</b>
                     <br><br>
-                    Age group: {{ group.0.get_age_group_display }}
+                    Age group: &nbsp; <b>{{ group.0.get_age_group_display }}</b>
                     <br><br>
-                    Members: <a href="{% url 'swimming:group_detail' group.0.id %}">{{ group.1 }}</a>
+                    Members: &nbsp; <a href="{% url 'swimming:group_detail' group.0.id %}">{{ group.1 }}</a>
                 </div>
             </div>
         </div>
