@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Coach</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}
+    Coach
+{% endblock %}
+
+
+{% block content %}
 <h1>I'm in coach page  {{ user }} {{ user.id }} {{ user.coach }} {{ user.coach.id }}</h1>
 <p></p>
-</body>
-</html>
+ <a href="{% url 'swimming:groups_list' user.coach.id %}">My Groups</a>
+{% endblock %}

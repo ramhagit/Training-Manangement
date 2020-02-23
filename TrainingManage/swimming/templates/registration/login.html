@@ -1,12 +1,11 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Login</title>
-</head>
-<body>
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
     <h1>Login</h1>
 
     <form method="post">
@@ -16,5 +15,4 @@
         </ul>
         <button>Login</button>
     </form>
-</body>
-</html>
+{% endblock %}

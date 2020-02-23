@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
     def handle(self, n, *args, **options):
         for i in range(3):
-            o = Coach.objects.create(user=User.objects.get(id=i+2), first_name = silly.name(), last_name = silly.name(), gender = silly.gender())
+            o = Coach.objects.create(user_id=i+2, first_name = silly.name(), last_name = silly.name(), gender = silly.gender())
             o.save()
 
         coaches = Coach.objects.all()
