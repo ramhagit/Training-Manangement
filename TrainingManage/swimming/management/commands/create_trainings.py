@@ -9,6 +9,12 @@ class Command(BaseCommand):
     help = "My shiny new management command for training creation."
 
     # def add_arguments(self, parser):
+
+
+
+
+
+
     #     parser.add_argument('sample', nargs = '+')
 
     def handle(self, *args, **options):

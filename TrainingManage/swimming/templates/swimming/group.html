@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ group }}</h1>
+<h1>{{ group }} ({{ group.get_level_display }})</h1>
 <dl>
 <dt>Swimmers in group:</dt>
 {% for member in members %}

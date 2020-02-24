@@ -21,7 +21,7 @@
             <li class="nav-item">
                 {% if user.is_authenticated %}
                     <span class="navbar-text">
-                        USER: {{ user }} (#{{ user.id }})
+                        USER: {{ user.coach }}
                 </span>
                     <a class="nav-link" href="{% url "logout" %}">
                         Logout
@@ -32,15 +32,18 @@
                     </a>
                 {% endif %}
             </li>
-{#            <li class="nav-item active">#}
-{#                <a class="nav-link" href="{% url "expenses:create" %}">#}
-{#                    Create Expense#}
-{#                </a>#}
-{#            </li>#}
-{#            <li class="nav-item active">#}
-{#                <a class="nav-link" href="{% url "feedback:contact" %}">Contact#}
-{#                    us</a>#}
-{#            </li>#}
+            {% block links %}
+
+            {% endblock %}
+            {#            <li class="nav-item active">#}
+            {#                <a class="nav-link" href="{% url "expenses:create" %}">#}
+            {#                    Create Expense#}
+            {#                </a>#}
+            {#            </li>#}
+            {#            <li class="nav-item active">#}
+            {#                <a class="nav-link" href="{% url "feedback:contact" %}">Contact#}
+            {#                    us</a>#}
+            {#            </li>#}
         </ul>
     </nav>
 

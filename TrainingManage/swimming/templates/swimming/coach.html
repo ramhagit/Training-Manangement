@@ -5,7 +5,16 @@
 
 
 {% block content %}
-<h1>I'm in coach page  {{ user }} {{ user.id }} {{ user.coach }} {{ user.coach.id }}</h1>
-<p></p>
- <a href="{% url 'swimming:groups_list' user.coach.id %}">My Groups</a>
+    <h1>I'm in coach page {{ user }} {{ user.id }} {{ user.coach }} {{ user.coach.id }}</h1>
+    <div class="week-schedule">
+      <p></p>
+    </div>
+
+
+{% endblock %}
+{% block links %}
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'swimming:groups_list' user.coach.id %}">My Groups</a>
+    </li>
 {% endblock %}
