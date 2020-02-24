@@ -52,8 +52,12 @@ class Facility(models.Model):
     capacity = models.IntegerField()
     location = models.CharField(max_length = 200)
 
+    def __str__(self):
+        return self.description
+
 
 class AdminSlot(models.Model):
+    title = models.CharField(max_length = 200)
     facility = models.ForeignKey(Facility, on_delete = models.PROTECT, related_name = "admin_slots")
     start_date_time = models.DateTimeField()
     length = models.IntegerField(default = 45)

@@ -7,7 +7,7 @@
       <auth-required>false</auth-required>
       <schema-mapping />
     </data-source>
-    <data-source name="db" uuid="5db1f60b-046d-441b-8b7b-ddc608f530e0">
+    <data-source name="db" uuid="9d5d3fd2-bf1e-487b-8093-97e4ab999e23">
       <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1" exact-driver-version="3.25">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
