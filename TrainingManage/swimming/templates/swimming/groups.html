@@ -1,48 +1,62 @@
 {% extends "base.html" %}
-{% load static %}
 
-    {% block title %}
-        Groups
-    {% endblock %}
-    {% block content %}
-        <div class="accordion" id="accordionExample">
-            {% for group in groups %}
-                <div class="card">
-                    <div class="card-header" id="heading{{ group.id }}">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                    data-target="#collapse{{ group.id }}"
-                                    aria-expanded="true" aria-controls="collapse{{ group.id }}">
-                                {{ group }}
-                            </button>
-                        </h2>
-                    </div>
+{% block title %}
+    Groups
+{% endblock %}
+{% block content %}
+    <div class="accordion" id="accordionExample">
+        {% for group in groups %}
+            <div class="card">
+                <div class="card-header" id="heading{{ group.id }}">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                data-target="#collapse{{ group.id }}"
+                                aria-expanded="true" aria-controls="collapse{{ group.id }}">
+                            {{ group }}
+                        </button>
+                    </h2>
+                </div>
 
-                    <div id="collapse{{ group.id }}" class="collapse" aria-labelledby="heading{{ group.id }}"
-                         data-parent="#accordionExample">
-                        <div class="card-body">
-                            Group capacity: &nbsp; <b>{{ group.capacity }}</b>
-                            <br><br>
-                            Level: &nbsp; <b>{{ group.get_level_display }}</b>
-                            <br><br>
-                            Age group: &nbsp; <b>{{ group.get_age_group_display }}</b>
-                            <br><br>
-                            Members: &nbsp; <a
-                                href="{% url 'swimming:groups_detail' group.id %}">{{ group.trainees.count }}</a>
+                <div id="collapse{{ group.id }}" class="collapse" aria-labelledby="heading{{ group.id }}"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="unit">
+                            <div>
+                                <a href="{% url 'swimming:group_trainings_list' group.id %}">Trainings</a>
+                                <br><br>
+                                Group capacity: &nbsp; <b>{{ group.capacity }}</b>
+                                <br><br>
+                                Level: &nbsp; <b>{{ group.get_level_display }}</b>
+                                <br><br>
+                                Age group: &nbsp; <b>{{ group.get_age_group_display }}</b>
+                                <br><br>
+                                Members: &nbsp; <a
+                                    href="{% url 'swimming:groups_detail' group.id %}">{{ group.trainees.count }}</a>
+                            </div>
+                            <div>
+                                <h3>{{ group }} ({{ group.get_level_display }})</h3>
+                                <dl>
+                                    <dt>Swimmers in group:</dt>
+                                    {% for trainee in group.trainees.all %}
+                                        <dd>{{ trainee }}</dd>
+                                    {% endfor %}
+                                </dl>
+                            </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    {% endblock %}
-    {% block scripts %}
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-                crossorigin="anonymous"></script>
-    {% endblock %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+{% endblock %}

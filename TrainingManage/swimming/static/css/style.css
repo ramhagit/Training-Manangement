@@ -1,11 +1,11 @@
-/*dl {*/
-/*    font-size: 30px;*/
-/*    display: block;*/
-/*    margin-top: 1em;*/
-/*    margin-bottom: 1em;*/
-/*    margin-left: 0;*/
-/*    margin-right: 0;*/
-/*}*/
+dl {
+    font-size: 30px;
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
 
 dt {
     margin-bottom: 1em;
@@ -15,5 +15,10 @@ dt {
 
 dd {
     margin-top: 1em;
+    margin-left: 2em;
     font-size: 26px;
+}
+
+div .unit {
+    display: inline-block;
 }

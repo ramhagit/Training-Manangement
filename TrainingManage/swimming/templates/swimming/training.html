@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{#{% load day_letter %}#}
+{% block title %}
+    Training{{ training.id }}
+{% endblock %}
+
+{% block content %}
+    <h3>{{ training.start_date_time.isoweekday }} {{ training.start_date_time.date }}</h3>
+    <dl>
+        <dt><h2><u>Group - {{ training.group }}</u></h2></dt>
+
+        <p>{{ training.facility }} ({{ training.facility.location }})</p>
+
+        {% for member in training.group.trainees.all %}
+            <dd><input type="checkbox"> {{ member }}</dd>
+        {% endfor %}
+
+    </dl>
+    <div>
+        <textarea name="training-content" rows="10" cols="30">{{ training.content }}</textarea>
+    </div>
+{% endblock %}

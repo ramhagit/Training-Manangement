@@ -15,8 +15,9 @@
 
 <body>
 <div class="container-fluid">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light navbar-expand">
         <a class="navbar-brand" href="{% url "swimming:coach_page" %}">Home</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
                 {% if user.is_authenticated %}
@@ -45,6 +46,7 @@
             {#                    us</a>#}
             {#            </li>#}
         </ul>
+    </div>
     </nav>
 
     {% if messages %}

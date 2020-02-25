@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Trainings - {{ trainings.0.group }}
+{% endblock %}
+
+{% block content %}
+    <dl>
+    <dt>TRAININGS --- {{ trainings.0.group }} ({{ trainings.0.group.get_level_display }}) ---</dt>
+        {% for training in trainings %}
+            <dd>
+                <a href="{% url 'swimming:trainings_detail' training.id %}">
+                    {{ training.number }} -- {{ training.start_date_time|date:"D (j/m) G:i" }}
+                </a>
+            </dd>
+        {% endfor %}
+    </dl>
+{% endblock %}
