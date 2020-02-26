@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{#{% load day_letter %}#}
+
 {% block title %}
-    Training{{ training.id }}
+    Trai{{ training.id }}
 {% endblock %}
 
 {% block content %}
-    <h3>{{ training.start_date_time.isoweekday }} {{ training.start_date_time.date }}</h3>
+    <h3>{{ training.start_date_time|date:"D j/n/Y" }}</h3>
     <dl>
         <dt><h2><u>Group - {{ training.group }}</u></h2></dt>
 

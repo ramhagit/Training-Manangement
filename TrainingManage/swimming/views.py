@@ -1,11 +1,14 @@
 import datetime
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.views.generic.dates import WeekArchiveView
 from swimming.models import Coach, Group, Trainee, Training
 from django.shortcuts import render, get_list_or_404, get_object_or_404, redirect
+
+
+def home(request):
+    return render(request, "swimming/home.html", {})
 
 
 @login_required
@@ -44,19 +47,27 @@ def group_trainings_list(request, group_id):
     return render(request, "swimming/group_trainings.html", {
         "trainings": trainings,
     })
-# class IndexView(generic.ListView, LoginRequiredMixin):
-#     template_name = 'swimming/group_trainings.html'
-#     context_object_name = 'group_trainings_list'
-#
-#     def get_queryset(self):
-#         return Training.objects.filter(group_id=group_id)
 
 
 @login_required
-def week_display(request, coach_id):
-    trainings = get_list_or_404(Training, group__coach_id = coach_id)
-    # times = trainings.order_by('date')
-    return render(request, "swimming/week_schedule.html", {})
+def expense_create(request):
+    # if not request.user.userprofile.is_manager:
+    #     return redirect("hell")
+    if request.method == "POST":
+        form = forms.ExpenseForm(request.POST)
+        if form.is_valid():
+            # data = form.cleaned_data
+            form.instance.user = request.user
+            o = form.save()
+            messages.success(request, f"Expense #{o.id} added. Thank you so very much!!!!!")
+            # return redirect(o)  # TODO: implement get_absolute_url
+            return redirect("expenses:list")
+
+    else:
+        form = forms.ExpenseForm()
+    return render(request, "expenses/expense_form.html", {
+        'form': form,
+    })
 
 
 class TrainingWeekArchiveView(LoginRequiredMixin, WeekArchiveView):
@@ -71,10 +82,18 @@ class TrainingWeekArchiveView(LoginRequiredMixin, WeekArchiveView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        # qs = self.get_queryset()
         full_calendar = Training.objects.all().order_by('start_date_time__time').distinct('start_date_time__time').values_list('start_date_time__time', flat=True)
         # week_days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        # week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        week_days = [
+            ('Sun', 'Sunday'),
+            ('Mon', 'Monday'),
+            ('Tue', 'Tuesday'),
+            ('Wed', 'Wednesday'),
+            ('Thu', 'Thursday'),
+            ('Fri', 'Friday'),
+            ('Sat', 'Saturday')
+        ]
         context['full_calendar'] = full_calendar
         context['week_days'] = week_days
         return context

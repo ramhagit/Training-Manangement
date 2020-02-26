@@ -10,43 +10,42 @@
           href="{% static "vendor/bootstrap/css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 
-    <title>{% block title %}PO TIDCHUF TITLE{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
 <div class="container-fluid">
     <nav class="navbar navbar-light bg-light navbar-expand">
         <a class="navbar-brand" href="{% url "swimming:coach_page" %}">Home</a>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                {% if user.is_authenticated %}
-                    <span class="navbar-text">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    {% if user.is_authenticated %}
+                        <span class="navbar-text">
                         USER: {{ user.coach }}
                 </span>
-                    <a class="nav-link" href="{% url "logout" %}">
-                        Logout
-                    </a>
-                {% else %}
-                    <a class="nav-link" href="{% url "login" %}">
-                        Login
-                    </a>
-                {% endif %}
-            </li>
-            {% block links %}
+                        <a class="nav-link" href="{% url "logout" %}">
+                            Logout
+                        </a>
+                    {% else %}
+                        <a class="nav-link" href="{% url "login" %}">
+                            Login
+                        </a>
+                    {% endif %}
+                </li>
 
-            {% endblock %}
-            {#            <li class="nav-item active">#}
-            {#                <a class="nav-link" href="{% url "expenses:create" %}">#}
-            {#                    Create Expense#}
-            {#                </a>#}
-            {#            </li>#}
-            {#            <li class="nav-item active">#}
-            {#                <a class="nav-link" href="{% url "feedback:contact" %}">Contact#}
-            {#                    us</a>#}
-            {#            </li>#}
-        </ul>
-    </div>
+                {% block links %}{% endblock %}
+                {#            <li class="nav-item active">#}
+                {#                <a class="nav-link" href="{% url "expenses:create" %}">#}
+                {#                    Create Expense#}
+                {#                </a>#}
+                {#            </li>#}
+                {#            <li class="nav-item active">#}
+                {#                <a class="nav-link" href="{% url "feedback:contact" %}">Contact#}
+                {#                    us</a>#}
+                {#            </li>#}
+            </ul>
+        </div>
     </nav>
 
     {% if messages %}
@@ -58,15 +57,13 @@
         </ul>
     {% endif %}
 
-    {% block content %}PO TIDCHUF CONTENT{% endblock %}
+    {% block content %}{% endblock %}
 
     <footer>
         Copyright 2020
     </footer>
 
-    {% block scripts %}
-
-    {% endblock %}
+    {% block scripts %}{% endblock %}
 
 </div>
 </body>

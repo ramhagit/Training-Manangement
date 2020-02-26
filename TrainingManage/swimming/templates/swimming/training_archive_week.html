@@ -24,7 +24,7 @@
         <tr>
             <th>Time</th>
             {% for day in week_days %}
-                <th>{{ day }}</th>
+                <th>{{ day.1 }}</th>
             {% endfor %}
         </tr>
         {% for time in full_calendar %}
@@ -35,7 +35,7 @@
                         {% for training in object_list %}
 {#                            {{ training.start_date_time.isoweekday|date:"d" }} {{ forloop.parentloop.counter|stringformat:"s" }}#}
 {#                            training.start_date_time|date:"D" == day#}
-                            {% if training.start_date_time|date:"D" == day and training.start_date_time|date:"G:i" == time|date:"G:i" %}
+                            {% if training.start_date_time|date:"D" == day.0 and training.start_date_time|date:"G:i" == time|date:"G:i" %}
                                 <a href="{% url 'swimming:trainings_detail' training.id %}">
                                     {{ training.group }}
                                 </a>

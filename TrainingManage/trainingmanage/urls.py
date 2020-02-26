@@ -18,7 +18,7 @@ from django.shortcuts import redirect
 from django.urls import path, include
 
 urlpatterns = [
-    path('', lambda request: redirect("swimming:coach_page")),
+    path('', lambda request: redirect("swimming:home")),
     path('admin/', admin.site.urls),
     path('accounts/', include("django.contrib.auth.urls")),
     path('swimming/', include('swimming.urls')),
