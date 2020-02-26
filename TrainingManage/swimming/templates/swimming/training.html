@@ -17,6 +17,15 @@
 
     </dl>
     <div>
-        <textarea name="training-content" rows="10" cols="30">{{ training.content }}</textarea>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field }}
+                {{ field.errors }}
+            {% endfor %}
+            <button type="submit">
+                update
+            </button>
+        </form>
     </div>
 {% endblock %}

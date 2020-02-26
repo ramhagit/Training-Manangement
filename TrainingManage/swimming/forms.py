@@ -8,6 +8,3 @@ class TrainingForm(forms.ModelForm):
         fields = [
             'content'
         ]
-        # exclude = [
-        #     'user',
-        # ]
