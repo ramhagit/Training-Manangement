@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
@@ -8,7 +10,8 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404, redirec
 
 @login_required
 def coach_page(request):
-    return render(request, 'swimming/coach.html', {})
+    today = datetime.datetime.now()
+    return render(request, 'swimming/coach.html', {'today': today})
 
 
 @login_required
@@ -68,24 +71,10 @@ class TrainingWeekArchiveView(LoginRequiredMixin, WeekArchiveView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        qs = self.get_queryset()
+        # qs = self.get_queryset()
         full_calendar = Training.objects.all().order_by('start_date_time__time').distinct('start_date_time__time').values_list('start_date_time__time', flat=True)
-
-
-        res = {
-            '13:15': [],
-            '13:15': [],
-            '13:15': [],
-            '13:15': [],
-            '13:15': [],
-            '13:15': [],
-            '13:15': [],
-            '13:15': [],
-            '13:15': [],
-        }
-        for item in qs:
-            pass
-
-        context['trainings'] = qs
+        # week_days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         context['full_calendar'] = full_calendar
+        context['week_days'] = week_days
         return context

@@ -1,20 +1,21 @@
 {% extends "base.html" %}
+
 {% block title %}
     Coach
 {% endblock %}
-
 
 {% block content %}
     <h1>I'm in coach page {{ user }} {{ user.id }} {{ user.coach }} {{ user.coach.id }}</h1>
     <div class="week-schedule">
       <p></p>
     </div>
-
-
 {% endblock %}
-{% block links %}
 
+{% block links %}
     <li class="nav-item active">
         <a class="nav-link" href="{% url 'swimming:groups_list' user.coach.id %}">My Groups</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'swimming:archive_week' today|date:"Y" today|date:"W" %}">My Week</a>
     </li>
 {% endblock %}

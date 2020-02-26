@@ -1,83 +1,49 @@
 {% extends "base.html" %}
 {% block title %}
-    Week{{ week|date:"W" }}_{{ week|date:"Y" }}
+    Week{{ week|date:"W" }}({{ week|date:"Y" }})
 {% endblock %}
 
 {% block content %}
-    <h1>Week {{ week|date:"W" }} -- {{ week|date:"F j, Y" }}</h1>
+    <p>
+        {% if previous_week %}
+            <a href="{% url 'swimming:archive_week' previous_week|date:"Y" previous_week|date:"W" %}">
+                < Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
+            </a>
+        {% endif %}
+        {% if previous_week and next_week %} ---   |   --- {% endif %}
+        {% if next_week %}
+            <a href="{% url 'swimming:archive_week' next_week|date:"Y" next_week|date:"W" %}">
+                Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }} >
+            </a>
+        {% endif %}
+    </p>
+
+    <h1>{{ week|date:"F j, Y" }} -- Week {{ week|date:"W" }}</h1>
 
     <table border="1">
         <tr>
             <th>Time</th>
-            <th>Sunday</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
+            {% for day in week_days %}
+                <th>{{ day }}</th>
+            {% endfor %}
         </tr>
-        {% for training in object_list %}
+        {% for time in full_calendar %}
             <tr>
-
-                <td> {{ training.start_date_time|date:"G:i" }}</td>
-                {% if training.start_date_time|date:"D" == "Sun" %}
-                    <td>{{ training.group }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if training.start_date_time|date:"D" == "Mon" %}
-                    <td>{{ training.group }} </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if training.start_date_time|date:"D" == "Tue" %}
-                    <td>{{ training.group }} </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if training.start_date_time|date:"D" == "Wed" %}
-                    <td>{{ training.group }} </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if training.start_date_time|date:"D" == "Thu" %}
-                    <td>{{ training.group }} </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if training.start_date_time|date:"D" == "Fri" %}
-                    <td>{{ training.group }} </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if training.start_date_time|date:"D" == "Sat" %}
-                    <td>{{ training.group }} </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {#                <td> {{ training.day }}</td>#}
-                {#                <td>{{ training.facility }} </td>#}
-                {#                <td>{{ training.active }} </td>#}
-                {#                <td>{{ training.length }} </td>#}
-                {#                <td>{{ training.start_date_time|date:"H:i" }} </td>#}
-                {#                <li>{{ training.start_date_time|date:"F j, Y" }}: {{ training.group }}</li>#}
+                <td> {{ time|date:"G:i" }}</td>
+                {% for day in week_days %}
+                    <td>
+                        {% for training in object_list %}
+{#                            {{ training.start_date_time.isoweekday|date:"d" }} {{ forloop.parentloop.counter|stringformat:"s" }}#}
+{#                            training.start_date_time|date:"D" == day#}
+                            {% if training.start_date_time|date:"D" == day and training.start_date_time|date:"G:i" == time|date:"G:i" %}
+                                <a href="{% url 'swimming:trainings_detail' training.id %}">
+                                    {{ training.group }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
             </tr>
         {% endfor %}
-
-        <ul>
-            {% for training in object_list %}
-                {#                <li>{{ training.start_date_time|date:"F j, Y" }}: {{ training.group }}</li>#}
-            {% endfor %}
-        </ul>
-
-        <p>
-            {% if previous_week %}
-                Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
-            {% endif %}
-            {% if previous_week and next_week %}--{% endif %}
-            {% if next_week %}
-                Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }}
-            {% endif %}
-        </p>
+    </table>
 {% endblock %}

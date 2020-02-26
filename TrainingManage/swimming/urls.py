@@ -13,5 +13,5 @@ urlpatterns = [
     path('group/<int:group_id>/', views.groups_detail, name = 'groups_detail'),
     path('group/<int:group_id>/trainings/', views.group_trainings_list, name = 'group_trainings_list'),
     path('training/<int:training_id>/', views.trainings_detail, name = 'trainings_detail'),
-    path('<int:year>/week/<int:week>/', TrainingWeekArchiveView.as_view(), name = "archive_week"),
+    path('coach/<int:year>/week/<int:week>/', TrainingWeekArchiveView.as_view(), name = "archive_week"),
 ]
