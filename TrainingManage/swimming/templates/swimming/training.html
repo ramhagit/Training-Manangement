@@ -12,7 +12,7 @@
         <p>{{ training.facility }} ({{ training.facility.location }})</p>
 
         {% for member in training.group.trainees.all %}
-            <dd><input type="checkbox"> {{ member }}</dd>
+            <dd>{{ member }}</dd>
         {% endfor %}
 
     </dl>

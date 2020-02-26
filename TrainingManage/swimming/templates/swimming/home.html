@@ -1,8 +1,42 @@
 {% extends "base.html" %}
+
 {% block title %}
-    Week
+    Home
+{% endblock %}
+
+{% block links %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "swimming:coach_page" %}">
+                <button id="hero__btn__next">Next</button>
+            </a>
+        </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <div id="coach"><a href="{% url 'swimming:coach_page' %}">coach</a></div>
+
+    <div class="hero">
+        <p class="hero__header">
+        <div class="hero__title">TrainMan</div>
+        <div class="hero__about">bla bla bla</div>
+        </p>
+        {#        <a href="{% url 'swimming:coach_page' %}">#}
+        {#            <button id="hero__btn">Sign In</button>#}
+        {#        </a>#}
+        {% if user.is_authenticated %}
+            <span class="navbar-text">
+                             Hello, {{ user.coach.first_name }}
+                        </span>
+            <a class="nav-link" href="{% url "logout" %}">
+                <button id="hero__btn__logout">Logout</button>
+            </a>
+        {% else %}
+
+            <a class="nav-link" href="{% url "login" %}">
+                <button id="hero__btn">Login</button>
+            </a>
+        {% endif %}
+        <div class="story"></div>
+    </div>
 {% endblock %}

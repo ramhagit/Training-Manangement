@@ -22,16 +22,22 @@
                     <div class="card-body">
                         <div class="unit">
                             <div>
-                                <a href="{% url 'swimming:group_trainings_list' group.id %}">Trainings</a>
-                                <br><br>
-                                Group capacity: &nbsp; <b>{{ group.capacity }}</b>
-                                <br><br>
+                                Members:
+                                <a href="{% url 'swimming:groups_detail' group.id %}">
+                                      {{ group.trainees.count }}
+                                </a>
+                                <br>
+                                <br>
                                 Level: &nbsp; <b>{{ group.get_level_display }}</b>
-                                <br><br>
+                                <br>
+                                <br>
                                 Age group: &nbsp; <b>{{ group.get_age_group_display }}</b>
-                                <br><br>
-                                Members: &nbsp; <a
-                                    href="{% url 'swimming:groups_detail' group.id %}">{{ group.trainees.count }}</a>
+                                <br>
+                                <br>
+                                Group capacity: &nbsp; <b>{{ group.capacity }}</b>
+                                <br>
+                                <br>
+                                <a href="{% url 'swimming:group_trainings_list' group.id %}">Trainings</a>
                             </div>
                             <div>
                                 <h3>{{ group }} ({{ group.get_level_display }})</h3>

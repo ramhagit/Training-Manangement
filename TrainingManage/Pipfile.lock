@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "17ab7ca10dfc1bf352375f217a9cd702c61ed6854f2deae2f08c6e634a56e7a5"
+            "sha256": "be275b2dc2e3104260deb8b41e59f604220298154055e50df7562351b06fd1ee"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -60,6 +60,14 @@
             ],
             "index": "pypi",
             "version": "==2.2.8"
+        },
+        "django-fontawesome-5": {
+            "hashes": [
+                "sha256:1be340e795a6a68ebd9ba5d75e26bd72a839515c351786ff45e16b90bf50c3a0",
+                "sha256:4fc4a7f5d0fe6e10d542ac9f1c143ad5e92aa61c6f310ea297c3c26bfc6001dd"
+            ],
+            "index": "pypi",
+            "version": "==1.0.18"
         },
         "importlib-metadata": {
             "hashes": [
