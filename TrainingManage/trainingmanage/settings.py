@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'swimming.apps.SwimmingConfig',
     'fontawesome_5',
+    'bootstrap4',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

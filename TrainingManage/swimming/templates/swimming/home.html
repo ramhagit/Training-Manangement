@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
     Home
@@ -19,15 +20,13 @@
     <div class="hero">
         <p class="hero__header">
         <div class="hero__title">TrainMan</div>
-        <div class="hero__about">bla bla bla</div>
+        <div class="hero__about">A Training Management Platform</div>
         </p>
         {#        <a href="{% url 'swimming:coach_page' %}">#}
         {#            <button id="hero__btn">Sign In</button>#}
         {#        </a>#}
         {% if user.is_authenticated %}
-            <span class="navbar-text">
-                             Hello, {{ user.coach.first_name }}
-                        </span>
+            <span class="navbar-text">Hello, {{ user.coach.first_name }}</span>
             <a class="nav-link" href="{% url "logout" %}">
                 <button id="hero__btn__logout">Logout</button>
             </a>
@@ -37,6 +36,23 @@
                 <button id="hero__btn">Login</button>
             </a>
         {% endif %}
-        <div class="story"></div>
+        <div class="story">
+            <div class="story__details">
+                {#            {% for item in story_list %}#}{#            {% endfor %}#}
+                <div class="story__item">
+                    <div class="story__title">Sign in</div>
+                    <div class="story__icon"><img src="{% static "images/log-in.svg" %}" alt="log-in"></div>
+                </div>
+                <div class="story__item">
+                    <div class="story__title">Your groups</div>
+
+                    <div class="story__icon"><img src="{% static "images/group.svg" %}" alt="groups"></div>
+                </div>
+                <div class="story__item">
+                    <div class="story__title">Your schedule</div>
+                    <div class="story__icon"><img src="{% static "images/calendar.svg" %}" alt="calendar"></div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

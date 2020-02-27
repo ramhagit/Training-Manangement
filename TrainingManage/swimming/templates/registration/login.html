@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% load static %}
+{% load bootstrap4 %}
+
 
 {% block title %}
     Login
@@ -7,12 +8,15 @@
 
 {% block content %}
     <h1>Login</h1>
+    <div class="row">
+        <div class="col-lg-4">
+            <form method="post">
+                {% csrf_token %}
 
-    <form method="post">
-        {% csrf_token %}
-        <ul>
-            {{ form.as_ul }}
-        </ul>
-        <button>Login</button>
-    </form>
+                {% bootstrap_form form %}
+                <button class="btn btn-primary">Login</button>
+
+            </form>
+        </div>
+    </div>
 {% endblock %}

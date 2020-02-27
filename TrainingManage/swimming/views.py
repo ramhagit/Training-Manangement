@@ -13,7 +13,27 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404, redirec
 
 
 def home(request):
-    return render(request, "swimming/home.html", {})
+    today = datetime.datetime.now()
+    story_list = [
+        {
+            'title': 'Sign in',
+            'img_src': 'log-in.svg'
+        },
+        {
+            'title': 'List of your group',
+            'img_src': 'group.svg',
+        },
+        {
+            'title': 'Watch your schedule',
+            'img_src': 'calendar.svg',
+        }
+    ]
+    context = {
+        'today': today,
+        'week': today.isocalendar()[1] - 1,
+        'story_list': story_list
+    }
+    return render(request, "swimming/home.html", context)
 
 
 @login_required
@@ -24,7 +44,7 @@ def coach_page(request):
 
 @login_required
 def groups_list(request, coach_id):
-    groups = get_list_or_404(Group, coach_id=coach_id, coach=request.user.coach)
+    groups = get_list_or_404(Group, coach_id = coach_id, coach = request.user.coach)
     return render(request, "swimming/groups.html", {
         "groups": groups,
     })
@@ -32,7 +52,7 @@ def groups_list(request, coach_id):
 
 @login_required
 def groups_detail(request, group_id):
-    group = get_object_or_404(Group, pk=group_id, coach=request.user.coach)
+    group = get_object_or_404(Group, pk = group_id, coach = request.user.coach)
     return render(request, "swimming/group.html", {
         "group": group
     })
@@ -40,7 +60,7 @@ def groups_detail(request, group_id):
 
 @login_required
 def trainings_detail(request, training_id):
-    training = get_object_or_404(Training, pk=training_id, group__coach__user=request.user)
+    training = get_object_or_404(Training, pk = training_id, group__coach__user = request.user)
     if request.method == "POST":
         form = forms.TrainingForm(request.POST)
         if form.is_valid():
@@ -60,7 +80,7 @@ def trainings_detail(request, training_id):
 
 @login_required
 def group_trainings_list(request, group_id):
-    trainings = get_list_or_404(Training, group_id=group_id, group__coach__user=request.user)
+    trainings = get_list_or_404(Training, group_id = group_id, group__coach__user = request.user)
     return render(request, "swimming/group_trainings.html", {
         "trainings": trainings,
     })
@@ -73,12 +93,13 @@ class TrainingWeekArchiveView(LoginRequiredMixin, WeekArchiveView):
     allow_empty = True
 
     def get_queryset(self):
-        qs = super().get_queryset().filter(group__coach__user=self.request.user)
+        qs = super().get_queryset().filter(group__coach__user = self.request.user)
         return qs
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        full_calendar = Training.objects.all().order_by('start_date_time__time').distinct('start_date_time__time').values_list('start_date_time__time', flat=True)
+        full_calendar = Training.objects.all().order_by('start_date_time__time').distinct(
+            'start_date_time__time').values_list('start_date_time__time', flat = True)
         week_days = [
             ('Sun', 'Sunday'),
             ('Mon', 'Monday'),

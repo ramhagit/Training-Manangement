@@ -13,6 +13,9 @@ silly = "*"
 inflect = "*"
 psycopg2 = "*"
 django-fontawesome-5 = "*"
+bootstrap4 = "*"
+django-crispy-forms = "*"
+django-bootstrap4 = "*"
 
 [requires]
 python_version = "3.7"
