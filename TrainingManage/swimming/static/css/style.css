@@ -13,6 +13,10 @@ div .unit {
     align-items: flex-start;
 }
 
+.login__headline {
+    margin-left: 33.2vw;
+}
+
 .navbar {
     display: flex;
     align-items: center;
@@ -202,4 +206,8 @@ dd {
 
 footer {
     height: 5vh;
+}
+
+td, th {
+    text-align: center;
 }
