@@ -3,6 +3,17 @@
 {% block title %}
     Groups
 {% endblock %}
+{% block links %}
+        <li>
+            <span class="navbar-text">Hello, {{ user.coach.first_name }}</span>
+        </li>
+{#     <li class="nav-item active">#}
+{#        <a class="nav-link" href="{% url 'swimming:archive_week' today|date:"Y" week %}">My Week</a>#}
+{#    </li>#}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "swimming:coach_page" %}">My Home</a>
+        </li>
+{% endblock %}
 {% block content %}
     <div class="accordion" id="accordionExample">
         {% for group in groups %}
@@ -39,8 +50,8 @@
                                 <br>
                                 <a href="{% url 'swimming:group_trainings_list' group.id %}">Trainings</a>
                             </div>
+                            <h3><a href="{% url 'swimming:groups_detail' group.id%}" >{{ group }} ({{ group.get_level_display }})</a></h3>
                             <div>
-                                <h3>{{ group }} ({{ group.get_level_display }})</h3>
                                 <dl>
                                     <dt>Swimmers in group:</dt>
                                     {% for trainee in group.trainees.all %}

@@ -4,14 +4,6 @@
     Coach_{{ user.coach.first_name }}
 {% endblock %}
 
-{% block content %}
-    <h1>Hi {{ user.coach }} !</h1>
-    <div class="refs">
-        <a class="nav-link" href="{% url 'swimming:groups_list' user.coach.id %}">My Groups</a>
-        <a class="nav-link" href="{% url 'swimming:archive_week' today|date:"Y" week %}">My Week</a>
-    </div>
-{% endblock %}
-
 {% block links %}
     <li class="nav-item active">
         <a class="nav-link" href="{% url 'swimming:groups_list' user.coach.id %}">My Groups</a>
@@ -20,3 +12,14 @@
         <a class="nav-link" href="{% url 'swimming:archive_week' today|date:"Y" week %}">My Week</a>
     </li>
 {% endblock %}
+
+{% block content %}
+    <div class="coach__content">
+        <h1>Hi {{ user.coach }} !</h1>
+        <div class="coach__refs">
+            <a class="coach__main-link" href="{% url 'swimming:archive_week' today|date:"Y" week %}">Your Week</a>
+            <a class="coach__main-link" href="{% url 'swimming:groups_list' user.coach.id %}">Your Groups</a>
+        </div>
+    </div>
+{% endblock %}
+

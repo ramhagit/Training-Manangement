@@ -9,6 +9,8 @@
 div .unit {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .navbar {
@@ -27,11 +29,18 @@ div .unit {
 }
 
 
-
 .navbar-text {
     color: #ecfeff;
     font-size: 1.5rem;
     font-family: david, sans-serif;
+}
+
+.navbar-expand .navbar-collapse {
+    justify-content: flex-end;
+}
+
+.navbar-text {
+    margin-right: 20rem;
 }
 
 .hero {
@@ -94,14 +103,48 @@ div .unit {
     color: var(--text-dark);
     text-align: center;
     font-size: 1.5rem;
+    font-family: david, sans-serif;
 }
+
+.week__content {
+    display: flex;
+    width: 100%;
+    height: 70vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.week__table {
+    width: 60%;
+}
+
 .navbar__logo {
     height: 6vh;
     width: 8vh;
 }
 
+.coach__content {
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.coach__refs {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.coach__main-link {
+    font-size: 7rem;
+}
+
 #hero__btn {
-/*margin: 20px;*/
+    /*margin: 20px;*/
 }
 
 #hero__btn, #hero__btn__logout, #hero__btn__next {

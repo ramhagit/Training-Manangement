@@ -2,48 +2,60 @@
 {% block title %}
     Week{{ week|date:"W" }}({{ week|date:"Y" }})
 {% endblock %}
-
+{% block links %}
+    <li>
+        <span class="navbar-text">Hello, {{ user.coach.first_name }}</span>
+    </li>
+    {#     <li class="nav-item active">#}
+    {#        <a class="nav-link" href="{% url 'swimming:archive_week' today|date:"Y" week %}">My Week</a>#}
+    {#    </li>#}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url "swimming:coach_page" %}">My Home</a>
+    </li>
+{% endblock %}
 {% block content %}
-    <p>
-        {% if previous_week %}
-            <a href="{% url 'swimming:archive_week' previous_week|date:"Y" previous_week|date:"W" %}">
-                < Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
-            </a>
-        {% endif %}
-        {% if previous_week and next_week %} ---   |   --- {% endif %}
-        {% if next_week %}
-            <a href="{% url 'swimming:archive_week' next_week|date:"Y" next_week|date:"W" %}">
-                Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }} >
-            </a>
-        {% endif %}
-    </p>
+    <div class="week__content">
+        <p>
+            {% if previous_week %}
+                <a href="{% url 'swimming:archive_week' previous_week|date:"Y" previous_week|date:"W" %}">
+                    < Previous Week: {{ previous_week|date:"W" }} of year {{ previous_week|date:"Y" }}
+                </a>
+            {% endif %}
+            {% if previous_week and next_week %} ---   |   --- {% endif %}
+            {% if next_week %}
+                <a href="{% url 'swimming:archive_week' next_week|date:"Y" next_week|date:"W" %}">
+                    Next week: {{ next_week|date:"W" }} of year {{ next_week|date:"Y" }} >
+                </a>
+            {% endif %}
+        </p>
 
-    <h1>{{ week|date:"F j, Y" }} -- Week {{ week|date:"W" }}</h1>
+        <h1>{{ week|date:"F j, Y" }} -- Week {{ week|date:"W" }}</h1>
 
-    <table border="1">
-        <tr>
-            <th>Time</th>
-            {% for day in week_days %}
-                <th>{{ day.1 }}</th>
-            {% endfor %}
-        </tr>
-        {% for time in full_calendar %}
+        <table class="week__table" border="1">
             <tr>
-                <td> {{ time|date:"G:i" }}</td>
+                <th>Time</th>
                 {% for day in week_days %}
-                    <td>
-                        {% for training in object_list %}
-{#                            {{ training.start_date_time.isoweekday|date:"d" }} {{ forloop.parentloop.counter|stringformat:"s" }}#}
-{#                            training.start_date_time|date:"D" == day#}
-                            {% if training.start_date_time|date:"D" == day.0 and training.start_date_time|date:"G:i" == time|date:"G:i" %}
-                                <a href="{% url 'swimming:trainings_detail' training.id %}">
-                                    {{ training.group }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    </td>
+                    <th>{{ day.1 }}</th>
                 {% endfor %}
             </tr>
-        {% endfor %}
-    </table>
+            {% for time in full_calendar %}
+                <tr>
+                    <td> {{ time|date:"G:i" }}</td>
+                    {% for day in week_days %}
+                        <td>
+                            {% for training in object_list %}
+                                {#                            {{ training.start_date_time.isoweekday|date:"d" }} {{ forloop.parentloop.counter|stringformat:"s" }}#}
+                                {#                            training.start_date_time|date:"D" == day#}
+                                {% if training.start_date_time|date:"D" == day.0 and training.start_date_time|date:"G:i" == time|date:"G:i" %}
+                                    <a href="{% url 'swimming:trainings_detail' training.id %}">
+                                        {{ training.group }}
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
