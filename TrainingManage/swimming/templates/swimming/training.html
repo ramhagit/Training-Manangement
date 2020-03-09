@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Trai{{ training.id }}
+    T{{ training.id }}
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
         {% endfor %}
 
     </dl>
-    <div>
+    <div class="training_content">
         <form method="post">
             {% csrf_token %}
             {% for field in form %}
@@ -24,7 +24,7 @@
                 {{ field.errors }}
             {% endfor %}
             <button type="submit">
-                update
+                Update
             </button>
         </form>
     </div>
